@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState} from 'react';
 import Logo from './Logo';
 import MobileNavLinks from './MobileNavLinks';
 import NavLinks from './NavLinks';
@@ -16,7 +16,7 @@ const NavBar = () => {
         <Logo/>
         <NavLinks/>
         <MobileNavLinks openMenu={openMenu} setOpenMenu={setOpenMenu} />
-        <FiMenu className="bg-orange-600 text-gray-100 text-3xl font-black md:hidden cursor-pointer" onClick={() => setOpenMenu(false)}/>
+        <FiMenu className="bg-orange-600 text-gray-100 text-3xl font-black md:hidden cursor-pointer" onClick={() => setOpenMenu(true)}/>
       </div>
     </nav>
   );

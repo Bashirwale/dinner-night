@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/UseAuth';
 import { FiUser } from 'react-icons/fi';
@@ -6,13 +6,25 @@ import { FiUser } from 'react-icons/fi';
 const NavLinks = () => {
   const { user, signOut} = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const openMenuRef = useRef(null);
   const navigate = useNavigate();
 
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
 
+    const handleClickOutside = (e) => {
+    if (openMenuRef.current && !openMenuRef.current.contains(e.target)) {
+      setShowDropdown(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   const handleSignOut = () => {
     signOut();
     navigate('/sign-in');
@@ -21,26 +33,26 @@ const NavLinks = () => {
 
 
   return (
-    <ul className="hidden md:flex gap-8 items-center">
+    <ul className="hidden md:flex gap-8 items-center"  ref={openMenuRef}>
       <li>
         <NavLink to="/" className="text-orange-600 font-bold text-xl">
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to="/" className="text-orange-600 font-bold text-xl">
+        <NavLink to="/about" className="text-orange-600 font-bold text-xl">
           About us
         </NavLink>
       </li>
       <li>
-        <NavLink to="/" className="text-orange-600 font-bold text-xl">
+        <NavLink to="/how-to-use" className="text-orange-600 font-bold text-xl">
           How to Use
         </NavLink>
       </li>
       {user ? (
         <li className="relative">
           <div
-            className="flex items-center cursor-pointer h-8 w-8 rounded-full bg-orange-500"
+            className="flex items-center cursor-pointer h-8 w-8 border-orange-500 rounded-full bg-orange-500"
             onClick={handleDropdownToggle}
           >
             {user.photoURL ? (

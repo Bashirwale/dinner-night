@@ -8,11 +8,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import Reservation from "./pages/Reservation";
+import About from "./pages/About";
+import HowToUse from "./pages/HowToUse";
 
 const App = () => {
  
   return (
-    <div className="h-full bg-gray-300" >
+    <div className="h-full" >
       <Router>
         <NavBar />
         <Routes>
@@ -24,6 +26,8 @@ const App = () => {
           <Route path="/edit-profile/:uid" element={<EditProfile />} />
           <Route path="/reservation" element={<Reservation/>} />
           <Route path="/sign-in" element={<SignIn/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="/how-to-use" element={<HowToUse/>} />
         </Routes>
         <Footer/>
       </Router>

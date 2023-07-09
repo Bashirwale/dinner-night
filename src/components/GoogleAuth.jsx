@@ -18,7 +18,7 @@ import { FaGoogle } from 'react-icons/fa';
       const user = result.user;
 
       //check for user in the database
-      const docRef = doc(db, "users", user.ud);
+      const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
       //if user doesn't exist, create user
       if (!docSnap.exists()) {
@@ -27,8 +27,8 @@ import { FaGoogle } from 'react-icons/fa';
           email: user.email,
           timestamp: serverTimestamp(),
         });
+        navigate("/profile");
       }
-      navigate("/");
     } catch (error) {
       toast.error("could not authorize with google");
     }
