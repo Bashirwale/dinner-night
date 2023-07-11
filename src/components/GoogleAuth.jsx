@@ -27,7 +27,7 @@ import { FaGoogle } from 'react-icons/fa';
           email: user.email,
           timestamp: serverTimestamp(),
         });
-        navigate("/profile");
+        navigate("/");
       }
     } catch (error) {
       toast.error("could not authorize with google");
