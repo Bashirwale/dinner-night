@@ -27,10 +27,11 @@ import { FaGoogle } from 'react-icons/fa';
           email: user.email,
           timestamp: serverTimestamp(),
         });
-        navigate("/");
       }
+      toast.success("successfully signed in")
+      navigate("/profile");
     } catch (error) {
-      toast.error("could not authorize with google");
+      console.log("could not authorize with google" + error);
     }
   };
   return (
